@@ -60,10 +60,9 @@ const Page = () => {
     const prompt =
       selections.length === 1
         ? selections[0].prompt
-        : [
-            "Apply all of the following makeup effects together in a single natural, cohesive look:",
-            ...selections.map((s, i) => `${i + 1}. ${s.prompt}`),
-          ].join(" ");
+        : `Apply all of the following makeup together in one natural, cohesive look. ${selections
+            .map((s) => s.prompt)
+            .join(". ")}.`;
 
     const makeupName = selections.map((s) => s.shadeName).join(" · ");
     const makeupType =
