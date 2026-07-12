@@ -1,0 +1,101 @@
+{
+  "common": {
+    "poweredBy": "unterstützt von",
+    "home": "Startseite",
+    "back": "Zurück",
+    "next": "Next",
+    "previous": "Previous",
+    "proceed": "Proceed",
+    "cancel": "Cancel",
+    "save": "Save",
+    "submit": "Submit"
+  },
+  "landing": {
+    "welcome": "Willkommen in der Zukunft!",
+    "beginConsultation": "Beginnen Sie Ihre KI-Beratung",
+    "cameraSettings": "Kameraeinstellungen",
+    "logout": "Abmelden"
+  },
+  "home": {
+    "title": "Startseite",
+    "instructions": "Anleitung zum Fotografieren",
+    "instruction1": "Machen Sie ein Foto von vorne und schauen Sie in die Kamera.",
+    "instruction2": "Binden Sie Ihre Haare los.",
+    "instruction3": "Stellen Sie sicher, dass das Raumlicht eingeschaltet ist und Ihr Gesicht gut beleuchtet ist.",
+    "recommended": "Empfohlen",
+    "avoid": "Vermeiden"
+  },
+  "selectTool": {
+    "title": "Wählen Sie ein KI-Beratungstool",
+    "makeupAdvisor": "MAKEUP TRY-ON",
+    "serviceDisabled": "This service has been disabled for your salon account. Please contact your administrator."
+  },
+  "customLookMakeup": {
+    "selectShadeFor": "Select a {effect} shade:",
+    "proceed": "Proceed",
+    "selectShade": "Please select a shade for each effect",
+    "pageLabel": "Page {page}",
+    "categories": {
+      "lipstick": "Lipstick",
+      "blush": "Blush",
+      "eyeshadow": "Eyeshadow"
+    }
+  },
+  "makeupAdvisor": {
+    "title": "Makeup Try-On",
+    "tabs": {
+      "customLook": "Custom Look",
+      "results": "Results"
+    },
+    "messages": {
+      "sessionError": "Could not create session. Please try again.",
+      "imageNotReady": "Camera image not found. Please capture a photo first.",
+      "success": "Makeup applied successfully!",
+      "error": "Failed to apply makeup. Please try again."
+    }
+  },
+  "makeupResult": {
+    "addOnLipstick": "Add lipstick",
+    "addOnBlush": "Add blush",
+    "addOnEyeshadow": "Add eyeshadow",
+    "noPreviousResult": "No Previous Result",
+    "loadingPrevious": "Loading previous results...",
+    "noPreviousFound": "No previous results found",
+    "errorLoadingPrevious": "Failed to load previous results"
+  },
+  "camera": {
+    "capture": "Aufnehmen",
+    "retake": "Erneut aufnehmen",
+    "usePhoto": "Foto verwenden",
+    "switchCamera": "Kamera wechseln",
+    "permissionDenied": "Kameraerlaubnis verweigert",
+    "permissionMessage": "Bitte erlauben Sie den Kamerazugriff, um ein Foto zu machen"
+  },
+  "form": {
+    "submit": "Absenden",
+    "cancel": "Abbrechen",
+    "next": "Weiter",
+    "previous": "Zurück",
+    "save": "Speichern",
+    "name": "Name",
+    "email": "E-Mail",
+    "phone": "Telefon",
+    "age": "Alter",
+    "gender": "Geschlecht",
+    "male": "Männlich",
+    "female": "Weiblich",
+    "other": "Andere"
+  },
+  "errors": {
+    "somethingWrong": "Etwas ist schief gelaufen",
+    "tryAgain": "Bitte versuchen Sie es erneut",
+    "networkError": "Netzwerkfehler. Bitte überprüfen Sie Ihre Verbindung",
+    "invalidInput": "Ungültige Eingabe",
+    "required": "Dieses Feld ist erforderlich"
+  },
+  "sessionResults": {
+    "title": "Sitzungsergebnisse",
+    "loading": "Lädt...",
+    "noResults": "Keine Ergebnisse gefunden"
+  }
+}

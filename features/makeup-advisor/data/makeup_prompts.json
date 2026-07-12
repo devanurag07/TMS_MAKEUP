@@ -1,0 +1,128 @@
+{
+  "lipstick": {
+    "Nude Beige": {
+      "prompt": "Apply a lipstick of this shade - rgb(198, 162, 138) on the lady's lips",
+      "rgb": [198, 162, 138]
+    },
+    "Pink Nude": {
+      "prompt": "Apply a lipstick of this shade - rgb(194, 143, 144) on the lady's lips",
+      "rgb": [194, 143, 144]
+    },
+    "Soft Pink": {
+      "prompt": "Apply a lipstick of this shade - rgb(229, 158, 181) on the lady's lips",
+      "rgb": [229, 158, 181]
+    },
+    "Rose": {
+      "prompt": "Apply a lipstick of this shade - rgb(191, 97, 122) on the lady's lips",
+      "rgb": [191, 97, 122]
+    },
+    "Coral": {
+      "prompt": "Apply a lipstick of this shade - rgb(240, 116, 102) on the lady's lips",
+      "rgb": [240, 116, 102]
+    },
+    "Classic Red": {
+      "prompt": "Apply a lipstick of this shade - rgb(186, 32, 45) on the lady's lips",
+      "rgb": [186, 32, 45]
+    },
+    "Berry": {
+      "prompt": "Apply a lipstick of this shade - rgb(139, 58, 98) on the lady's lips",
+      "rgb": [139, 58, 98]
+    },
+    "Wine": {
+      "prompt": "Apply a lipstick of this shade - rgb(108, 35, 52) on the lady's lips",
+      "rgb": [108, 35, 52]
+    },
+    "Brown Nude": {
+      "prompt": "Apply a lipstick of this shade - rgb(142, 95, 77) on the lady's lips",
+      "rgb": [142, 95, 77]
+    },
+    "Plum": {
+      "prompt": "Apply a lipstick of this shade - rgb(109, 60, 99) on the lady's lips",
+      "rgb": [109, 60, 99]
+    }
+  },
+  "blush": {
+    "Soft Peach": {
+      "prompt": "Apply a very subtle blush of this shade - rgb(245, 193, 168) on the lady's face",
+      "rgb": [245, 193, 168]
+    },
+    "Peach": {
+      "prompt": "Apply a very subtle blush of this shade - rgb(239, 161, 122) on the lady's face",
+      "rgb": [239, 161, 122]
+    },
+    "Coral": {
+      "prompt": "Apply a very subtle blush of this shade - rgb(241, 129, 107) on the lady's face",
+      "rgb": [241, 129, 107]
+    },
+    "Baby Pink": {
+      "prompt": "Apply a very subtle blush of this shade - rgb(248, 192, 209) on the lady's face",
+      "rgb": [248, 192, 209]
+    },
+    "Rose Pink": {
+      "prompt": "Apply a very subtle blush of this shade - rgb(221, 128, 152) on the lady's face",
+      "rgb": [221, 128, 152]
+    },
+    "Mauve": {
+      "prompt": "Apply a very subtle blush of this shade - rgb(177, 128, 155) on the lady's face",
+      "rgb": [177, 128, 155]
+    },
+    "Berry": {
+      "prompt": "Apply a very subtle blush of this shade - rgb(164, 87, 118) on the lady's face",
+      "rgb": [164, 87, 118]
+    },
+    "Terracotta": {
+      "prompt": "Apply a very subtle blush of this shade - rgb(184, 102, 72) on the lady's face",
+      "rgb": [184, 102, 72]
+    },
+    "Apricot": {
+      "prompt": "Apply a very subtle blush of this shade - rgb(242, 177, 117) on the lady's face",
+      "rgb": [242, 177, 117]
+    },
+    "Sun-kissed Bronze": {
+      "prompt": "Apply a very subtle blush of this shade - rgb(173, 119, 79) on the lady's face",
+      "rgb": [173, 119, 79]
+    }
+  },
+  "eyeshadow": {
+    "Nude Matte": {
+      "prompt": "Apply a very subtle eyeshadow of this shade - rgb(194, 170, 145) on the lady's face",
+      "rgb": [194, 170, 145]
+    },
+    "Champagne": {
+      "prompt": "Apply a very subtle eyeshadow of this shade - rgb(235, 216, 176) on the lady's face",
+      "rgb": [235, 216, 176]
+    },
+    "Taupe": {
+      "prompt": "Apply a very subtle eyeshadow of this shade - rgb(147, 130, 120) on the lady's face",
+      "rgb": [147, 130, 120]
+    },
+    "Bronze": {
+      "prompt": "Apply a very subtle eyeshadow of this shade - rgb(162, 104, 65) on the lady's face",
+      "rgb": [162, 104, 65]
+    },
+    "Rose Gold": {
+      "prompt": "Apply a very subtle eyeshadow of this shade - rgb(196, 140, 128) on the lady's face",
+      "rgb": [196, 140, 128]
+    },
+    "Gold Glitter": {
+      "prompt": "Apply a very subtle eyeshadow of this shade - rgb(218, 176, 53) on the lady's face",
+      "rgb": [218, 176, 53]
+    },
+    "Brown Smokey": {
+      "prompt": "Apply a very subtle eyeshadow of this shade - rgb(101, 73, 60) on the lady's face",
+      "rgb": [101, 73, 60]
+    },
+    "Black Smokey": {
+      "prompt": "Apply a very subtle eyeshadow of this shade - rgb(48, 48, 52) on the lady's face",
+      "rgb": [48, 48, 52]
+    },
+    "Pink Mauve": {
+      "prompt": "Apply a very subtle eyeshadow of this shade - rgb(173, 116, 143) on the lady's face",
+      "rgb": [173, 116, 143]
+    },
+    "Emerald": {
+      "prompt": "Apply a very subtle eyeshadow of this shade - rgb(0, 123, 95) on the lady's face",
+      "rgb": [0, 123, 95]
+    }
+  }
+}

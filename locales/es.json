@@ -1,0 +1,101 @@
+{
+  "common": {
+    "poweredBy": "desarrollado por",
+    "home": "Inicio",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "proceed": "Continuar",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "submit": "Enviar"
+  },
+  "landing": {
+    "welcome": "¡Bienvenido al futuro!",
+    "beginConsultation": "Comienza tu Consulta con IA",
+    "cameraSettings": "Ajustes de cámara",
+    "logout": "Cerrar sesión"
+  },
+  "home": {
+    "title": "Inicio",
+    "instructions": "Instrucciones para tomar la foto",
+    "instruction1": "Toma una foto de frente, mirando a la cámara.",
+    "instruction2": "Suelta tu cabello.",
+    "instruction3": "Asegúrate de que la luz de la habitación esté encendida y tu rostro esté bien iluminado.",
+    "recommended": "Recomendado",
+    "avoid": "Evitar"
+  },
+  "selectTool": {
+    "title": "Selecciona una herramienta de consulta IA",
+    "makeupAdvisor": "MAKEUP TRY-ON",
+    "serviceDisabled": "This service has been disabled for your salon account. Please contact your administrator."
+  },
+  "customLookMakeup": {
+    "selectShadeFor": "Select a {effect} shade:",
+    "proceed": "Proceed",
+    "selectShade": "Please select a shade for each effect",
+    "pageLabel": "Page {page}",
+    "categories": {
+      "lipstick": "Lipstick",
+      "blush": "Blush",
+      "eyeshadow": "Eyeshadow"
+    }
+  },
+  "makeupAdvisor": {
+    "title": "Makeup Try-On",
+    "tabs": {
+      "customLook": "Custom Look",
+      "results": "Results"
+    },
+    "messages": {
+      "sessionError": "Could not create session. Please try again.",
+      "imageNotReady": "Camera image not found. Please capture a photo first.",
+      "success": "Makeup applied successfully!",
+      "error": "Failed to apply makeup. Please try again."
+    }
+  },
+  "makeupResult": {
+    "addOnLipstick": "Add lipstick",
+    "addOnBlush": "Add blush",
+    "addOnEyeshadow": "Add eyeshadow",
+    "noPreviousResult": "No Previous Result",
+    "loadingPrevious": "Loading previous results...",
+    "noPreviousFound": "No previous results found",
+    "errorLoadingPrevious": "Failed to load previous results"
+  },
+  "camera": {
+    "capture": "Capturar",
+    "retake": "Volver a Tomar",
+    "usePhoto": "Usar Foto",
+    "switchCamera": "Cambiar Cámara",
+    "permissionDenied": "Permiso de cámara denegado",
+    "permissionMessage": "Por favor permite el acceso a la cámara para tomar una foto"
+  },
+  "form": {
+    "submit": "Enviar",
+    "cancel": "Cancelar",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "save": "Guardar",
+    "name": "Nombre",
+    "email": "Correo Electrónico",
+    "phone": "Teléfono",
+    "age": "Edad",
+    "gender": "Género",
+    "male": "Masculino",
+    "female": "Femenino",
+    "other": "Otro"
+  },
+  "errors": {
+    "somethingWrong": "Algo salió mal",
+    "tryAgain": "Por favor, inténtalo de nuevo",
+    "networkError": "Error de red. Por favor verifica tu conexión",
+    "invalidInput": "Entrada inválida",
+    "required": "Este campo es obligatorio"
+  },
+  "sessionResults": {
+    "title": "Resultados de la Sesión",
+    "loading": "Cargando...",
+    "noResults": "No se encontraron resultados"
+  }
+}

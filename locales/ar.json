@@ -1,0 +1,101 @@
+{
+  "common": {
+    "poweredBy": "مدعوم من",
+    "home": "الرئيسية",
+    "back": "رجوع",
+    "next": "التالي",
+    "previous": "السابق",
+    "proceed": "متابعة",
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "submit": "إرسال"
+  },
+  "landing": {
+    "welcome": "مرحباً بك في المستقبل!",
+    "beginConsultation": "ابدأ استشارتك بالذكاء الاصطناعي",
+    "cameraSettings": "إعدادات الكاميرا",
+    "logout": "تسجيل الخروج"
+  },
+  "home": {
+    "title": "الرئيسية",
+    "instructions": "تعليمات التقاط الصورة",
+    "instruction1": "التقط صورة أمامية وانظر إلى الكاميرا.",
+    "instruction2": "افكّي شعرك.",
+    "instruction3": "تأكدي من تشغيل إضاءة الغرفة وأن وجهك مضاء جيداً.",
+    "recommended": "موصى به",
+    "avoid": "تجنّب"
+  },
+  "selectTool": {
+    "title": "اختر أداة استشارة بالذكاء الاصطناعي",
+    "makeupAdvisor": "MAKEUP TRY-ON",
+    "serviceDisabled": "تم تعطيل هذه الخدمة لحساب صالونك. يرجى التواصل مع المسؤول."
+  },
+  "customLookMakeup": {
+    "selectShadeFor": "Select a {effect} shade:",
+    "proceed": "Proceed",
+    "selectShade": "Please select a shade for each effect",
+    "pageLabel": "Page {page}",
+    "categories": {
+      "lipstick": "Lipstick",
+      "blush": "Blush",
+      "eyeshadow": "Eyeshadow"
+    }
+  },
+  "makeupAdvisor": {
+    "title": "Makeup Try-On",
+    "tabs": {
+      "customLook": "Custom Look",
+      "results": "Results"
+    },
+    "messages": {
+      "sessionError": "Could not create session. Please try again.",
+      "imageNotReady": "Camera image not found. Please capture a photo first.",
+      "success": "Makeup applied successfully!",
+      "error": "Failed to apply makeup. Please try again."
+    }
+  },
+  "makeupResult": {
+    "addOnLipstick": "Add lipstick",
+    "addOnBlush": "Add blush",
+    "addOnEyeshadow": "Add eyeshadow",
+    "noPreviousResult": "No Previous Result",
+    "loadingPrevious": "Loading previous results...",
+    "noPreviousFound": "No previous results found",
+    "errorLoadingPrevious": "Failed to load previous results"
+  },
+  "camera": {
+    "capture": "التقاط",
+    "retake": "إعادة التقاط",
+    "usePhoto": "استخدام الصورة",
+    "switchCamera": "تبديل الكاميرا",
+    "permissionDenied": "تم رفض إذن الكاميرا",
+    "permissionMessage": "يرجى السماح بالوصول إلى الكاميرا لالتقاط صورة"
+  },
+  "form": {
+    "submit": "إرسال",
+    "cancel": "إلغاء",
+    "next": "التالي",
+    "previous": "السابق",
+    "save": "حفظ",
+    "name": "الاسم",
+    "email": "البريد الإلكتروني",
+    "phone": "الهاتف",
+    "age": "العمر",
+    "gender": "الجنس",
+    "male": "ذكر",
+    "female": "أنثى",
+    "other": "آخر"
+  },
+  "errors": {
+    "somethingWrong": "حدث خطأ ما",
+    "tryAgain": "يرجى المحاولة مرة أخرى",
+    "networkError": "خطأ في الشبكة. يرجى التحقق من اتصالك",
+    "invalidInput": "إدخال غير صالح",
+    "required": "هذا الحقل مطلوب"
+  },
+  "sessionResults": {
+    "title": "نتائج الجلسة",
+    "loading": "جارٍ التحميل...",
+    "noResults": "لم يتم العثور على نتائج"
+  }
+}

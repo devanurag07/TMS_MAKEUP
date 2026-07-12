@@ -1,0 +1,101 @@
+{
+  "common": {
+    "poweredBy": "द्वारा संचालित",
+    "home": "होम",
+    "back": "वापस",
+    "next": "अगला",
+    "previous": "पिछला",
+    "proceed": "आगे बढ़ें",
+    "cancel": "रद्द करें",
+    "save": "सहेजें",
+    "submit": "जमा करें"
+  },
+  "landing": {
+    "welcome": "भविष्य में आपका स्वागत है!",
+    "beginConsultation": "अपना AI परामर्श शुरू करें",
+    "cameraSettings": "कैमरा सेटिंग्स",
+    "logout": "लॉग आउट"
+  },
+  "home": {
+    "title": "होम",
+    "instructions": "फोटो लेने के निर्देश",
+    "instruction1": "सामने से फोटो लें, कैमरे की ओर देखते हुए।",
+    "instruction2": "अपने बालों को खोलें।",
+    "instruction3": "सुनिश्चित करें कि कमरे की रोशनी चालू है और आपका चेहरा अच्छी तरह से प्रकाशित है।",
+    "recommended": "अनुशंसित",
+    "avoid": "से बचें"
+  },
+  "selectTool": {
+    "title": "एक AI परामर्श उपकरण चुनें",
+    "makeupAdvisor": "MAKEUP TRY-ON",
+    "serviceDisabled": "यह सेवा आपके सैलून खाते के लिए अक्षम कर दी गई है। कृपया अपने व्यवस्थापक से संपर्क करें।"
+  },
+  "customLookMakeup": {
+    "selectShadeFor": "Select a {effect} shade:",
+    "proceed": "Proceed",
+    "selectShade": "Please select a shade for each effect",
+    "pageLabel": "Page {page}",
+    "categories": {
+      "lipstick": "Lipstick",
+      "blush": "Blush",
+      "eyeshadow": "Eyeshadow"
+    }
+  },
+  "makeupAdvisor": {
+    "title": "Makeup Try-On",
+    "tabs": {
+      "customLook": "Custom Look",
+      "results": "Results"
+    },
+    "messages": {
+      "sessionError": "Could not create session. Please try again.",
+      "imageNotReady": "Camera image not found. Please capture a photo first.",
+      "success": "Makeup applied successfully!",
+      "error": "Failed to apply makeup. Please try again."
+    }
+  },
+  "makeupResult": {
+    "addOnLipstick": "Add lipstick",
+    "addOnBlush": "Add blush",
+    "addOnEyeshadow": "Add eyeshadow",
+    "noPreviousResult": "No Previous Result",
+    "loadingPrevious": "Loading previous results...",
+    "noPreviousFound": "No previous results found",
+    "errorLoadingPrevious": "Failed to load previous results"
+  },
+  "camera": {
+    "capture": "कैप्चर करें",
+    "retake": "फिर से लें",
+    "usePhoto": "फोटो का उपयोग करें",
+    "switchCamera": "कैमरा बदलें",
+    "permissionDenied": "कैमरा अनुमति अस्वीकृत",
+    "permissionMessage": "कृपया फोटो लेने के लिए कैमरा एक्सेस की अनुमति दें"
+  },
+  "form": {
+    "submit": "जमा करें",
+    "cancel": "रद्द करें",
+    "next": "अगला",
+    "previous": "पिछला",
+    "save": "सहेजें",
+    "name": "नाम",
+    "email": "ईमेल",
+    "phone": "फोन",
+    "age": "उम्र",
+    "gender": "लिंग",
+    "male": "पुरुष",
+    "female": "महिला",
+    "other": "अन्य"
+  },
+  "errors": {
+    "somethingWrong": "कुछ गलत हो गया",
+    "tryAgain": "कृपया पुनः प्रयास करें",
+    "networkError": "नेटवर्क त्रुटि। कृपया अपना कनेक्शन जांचें",
+    "invalidInput": "अमान्य इनपुट",
+    "required": "यह फ़ील्ड आवश्यक है"
+  },
+  "sessionResults": {
+    "title": "सत्र परिणाम",
+    "loading": "लोड हो रहा है...",
+    "noResults": "कोई परिणाम नहीं मिला"
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "common": {
+    "poweredBy": "powered by",
+    "home": "Home",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "proceed": "Proceed",
+    "cancel": "Cancel",
+    "save": "Save",
+    "submit": "Submit"
+  },
+  "landing": {
+    "welcome": "Welcome to the future!",
+    "beginConsultation": "Begin your AI Consultation",
+    "cameraSettings": "Camera settings",
+    "logout": "Logout"
+  },
+  "home": {
+    "title": "Home",
+    "instructions": "Instructions to click photo",
+    "instruction1": "Click a front facing photo, looking into the camera.",
+    "instruction2": "Keep your face clear of hair where possible.",
+    "instruction3": "Make sure the room light is switched on and your face is well lit.",
+    "recommended": "Recommended",
+    "avoid": "Avoid"
+  },
+  "selectTool": {
+    "title": "Select an AI consultation tool",
+    "makeupAdvisor": "MAKEUP TRY-ON",
+    "serviceDisabled": "This service has been disabled for your salon account. Please contact your administrator."
+  },
+  "customLookMakeup": {
+    "selectShadeFor": "Select a {effect} shade:",
+    "proceed": "Proceed",
+    "selectShade": "Please select at least one shade",
+    "pageLabel": "Page {page}",
+    "categories": {
+      "lipstick": "Lipstick",
+      "blush": "Blush",
+      "eyeshadow": "Eyeshadow"
+    }
+  },
+  "makeupAdvisor": {
+    "title": "Makeup Try-On",
+    "tabs": {
+      "customLook": "Custom Look",
+      "results": "Results"
+    },
+    "messages": {
+      "sessionError": "Could not create session. Please try again.",
+      "imageNotReady": "Camera image not found. Please capture a photo first.",
+      "success": "Makeup applied successfully!",
+      "error": "Failed to apply makeup. Please try again."
+    }
+  },
+  "makeupResult": {
+    "addOnLipstick": "Add lipstick",
+    "addOnBlush": "Add blush",
+    "addOnEyeshadow": "Add eyeshadow",
+    "noPreviousResult": "No Previous Result",
+    "loadingPrevious": "Loading previous results...",
+    "noPreviousFound": "No previous results found",
+    "errorLoadingPrevious": "Failed to load previous results"
+  },
+  "camera": {
+    "capture": "Capture",
+    "retake": "Retake",
+    "usePhoto": "Use Photo",
+    "switchCamera": "Switch Camera",
+    "permissionDenied": "Camera permission denied",
+    "permissionMessage": "Please allow camera access to take a photo"
+  },
+  "form": {
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "next": "Next",
+    "previous": "Previous",
+    "save": "Save",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "age": "Age",
+    "gender": "Gender",
+    "male": "Male",
+    "female": "Female",
+    "other": "Other"
+  },
+  "errors": {
+    "somethingWrong": "Something went wrong",
+    "tryAgain": "Please try again",
+    "networkError": "Network error. Please check your connection",
+    "invalidInput": "Invalid input",
+    "required": "This field is required"
+  },
+  "sessionResults": {
+    "title": "Session Results",
+    "loading": "Loading...",
+    "noResults": "No makeup results found"
+  }
+}
