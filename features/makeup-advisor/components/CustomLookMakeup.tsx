@@ -22,7 +22,8 @@ interface CustomLookMakeupProps {
 const prompts = makeupPrompts as MakeupPrompts;
 
 const PAGE_CATEGORIES: MakeupCategory[][] = [
-  ["lipstick", "blush"],
+  ["lipstick"],
+  ["blush"],
   ["eyeshadow"],
 ];
 
@@ -51,8 +52,14 @@ const CustomLookMakeup = ({
   const t = useTranslations("customLookMakeup");
   const tCommon = useTranslations("common");
 
-  const startPage =
-    initialCategories[0] === "eyeshadow" ? 1 : 0;
+  const startPage = (() => {
+    const target = initialCategories[0];
+    if (!target) return 0;
+    const index = PAGE_CATEGORIES.findIndex((categories) =>
+      categories.includes(target)
+    );
+    return index === -1 ? 0 : index;
+  })();
 
   const [page, setPage] = useState(startPage);
   const [selectedShades, setSelectedShades] = useState<
