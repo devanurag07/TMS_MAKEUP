@@ -16,3 +16,18 @@ export type MakeupSelection = {
   shadeName: string;
   prompt: string;
 };
+
+/** A single product inside a Look Advisor combo (from backend analysis) */
+export type LookComboItem = {
+  category: MakeupCategory;
+  shadeName: string;
+  prompt: string;
+  hex: string;
+};
+
+/** A complete, coordinated look suggested by the Look Advisor */
+export type LookCombo = {
+  name: string;
+  description: string;
+  items: LookComboItem[];
+};

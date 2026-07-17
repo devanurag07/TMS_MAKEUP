@@ -28,7 +28,21 @@
   "selectTool": {
     "title": "एक AI परामर्श उपकरण चुनें",
     "makeupAdvisor": "MAKEUP TRY-ON",
+    "lookAdvisor": "लुक सलाहकार",
     "serviceDisabled": "यह सेवा आपके सैलून खाते के लिए अक्षम कर दी गई है। कृपया अपने व्यवस्थापक से संपर्क करें।"
+  },
+  "lookAdvisor": {
+    "title": "लुक सलाहकार",
+    "tabs": {
+      "looks": "सुझाए गए लुक",
+      "results": "परिणाम"
+    },
+    "analyzing": "आपके फीचर्स का विश्लेषण कर लुक तैयार किए जा रहे हैं…",
+    "tryThisLook": "यह लुक आज़माएं",
+    "lookLabel": "लुक {index}",
+    "noCombos": "कोई लुक सुझाया नहीं जा सका। कृपया पुनः प्रयास करें।",
+    "error": "लुक तैयार नहीं हो सके। कृपया पुनः प्रयास करें।",
+    "retry": "पुनः प्रयास करें"
   },
   "customLookMakeup": {
     "selectShadeFor": "Select a {effect} shade:",

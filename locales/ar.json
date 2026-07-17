@@ -28,7 +28,21 @@
   "selectTool": {
     "title": "اختر أداة استشارة بالذكاء الاصطناعي",
     "makeupAdvisor": "MAKEUP TRY-ON",
+    "lookAdvisor": "مستشار الإطلالة",
     "serviceDisabled": "تم تعطيل هذه الخدمة لحساب صالونك. يرجى التواصل مع المسؤول."
+  },
+  "lookAdvisor": {
+    "title": "مستشار الإطلالة",
+    "tabs": {
+      "looks": "الإطلالات المقترحة",
+      "results": "النتيجة"
+    },
+    "analyzing": "يتم تحليل ملامحك لإنشاء الإطلالات…",
+    "tryThisLook": "جرّب هذه الإطلالة",
+    "lookLabel": "إطلالة {index}",
+    "noCombos": "تعذّر اقتراح إطلالات. يرجى المحاولة مرة أخرى.",
+    "error": "تعذّر إنشاء الإطلالات. يرجى المحاولة مرة أخرى.",
+    "retry": "حاول مرة أخرى"
   },
   "customLookMakeup": {
     "selectShadeFor": "Select a {effect} shade:",

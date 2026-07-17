@@ -28,7 +28,21 @@
   "selectTool": {
     "title": "Wählen Sie ein KI-Beratungstool",
     "makeupAdvisor": "MAKEUP TRY-ON",
+    "lookAdvisor": "LOOK-BERATER",
     "serviceDisabled": "This service has been disabled for your salon account. Please contact your administrator."
+  },
+  "lookAdvisor": {
+    "title": "Look-Berater",
+    "tabs": {
+      "looks": "Vorgeschlagene Looks",
+      "results": "Ergebnis"
+    },
+    "analyzing": "Ihre Merkmale werden analysiert, um Looks zu erstellen…",
+    "tryThisLook": "Diesen Look ausprobieren",
+    "lookLabel": "Look {index}",
+    "noCombos": "Es konnten keine Looks vorgeschlagen werden. Bitte erneut versuchen.",
+    "error": "Looks konnten nicht erstellt werden. Bitte erneut versuchen.",
+    "retry": "Erneut versuchen"
   },
   "customLookMakeup": {
     "selectShadeFor": "Select a {effect} shade:",

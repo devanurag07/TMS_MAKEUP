@@ -21,6 +21,7 @@ const Page = () => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   const makeupEnabled = isSalonServiceEnabled("makeup-advisor");
+  const lookAdvisorEnabled = isSalonServiceEnabled("makeup-advisor");
 
   const getImagePreview = () => {
     const image = getFileFromLocalStorage(CAMERA_CAPTURE_KEY);
@@ -80,13 +81,21 @@ const Page = () => {
             {t("selectTool.title")}
           </div>
 
-          <div className="grid grid-cols-1 gap-10 p-16 max-w-2xl mx-auto">
+          <div className="grid grid-cols-2 gap-10 p-16 max-w-4xl mx-auto">
             <ServiceToolCard
               image={MakeupAdvisorImg}
               imageAlt="makeup-advisor"
               label={t("selectTool.makeupAdvisor")}
               enabled={makeupEnabled}
               onSelect={() => router.push("/makeup-advisor")}
+              onLockedClick={showDisabledNudge}
+            />
+            <ServiceToolCard
+              image={MakeupAdvisorImg}
+              imageAlt="look-advisor"
+              label={t("selectTool.lookAdvisor")}
+              enabled={lookAdvisorEnabled}
+              onSelect={() => router.push("/look-advisor")}
               onLockedClick={showDisabledNudge}
             />
           </div>
