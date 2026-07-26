@@ -57,12 +57,14 @@ const Page = () => {
       throw new Error("IMAGE_NOT_READY");
     }
 
-    const prompt =
+    const basePrompt =
       selections.length === 1
         ? selections[0].prompt
         : `Apply all of the following makeup together in one natural, cohesive look. ${selections
             .map((s) => s.prompt)
             .join(". ")}.`;
+
+    const prompt = `${basePrompt} Do not change any facial feature of the woman like lips, eyes or anything else.`;
 
     const makeupName = selections.map((s) => s.shadeName).join(" · ");
     const makeupType =

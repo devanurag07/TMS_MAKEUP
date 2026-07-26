@@ -1,6 +1,7 @@
 import axiosClient from "@/core/network/axios-client";
 import { MAKEUP_LOOK_ADVISOR_URL } from "@/core/constants/url-constants";
 import type {
+  LookAdvisorPreferences,
   LookCombo,
   LookComboItem,
   MakeupCategory,
@@ -59,11 +60,17 @@ const mapCombo = (raw: RawCombo): LookCombo => ({
  */
 export const fetchLookCombos = async (
   image: File,
-  options?: { sessionId?: string; gender?: string }
+  options: {
+    preferences: LookAdvisorPreferences;
+    sessionId?: string;
+    gender?: string;
+  }
 ): Promise<LookCombo[]> => {
   const formData = new FormData();
   formData.append("image", image);
   formData.append("gender", options?.gender ?? "female");
+  formData.append("desired_look", options.preferences.desiredLook);
+  formData.append("outfit_color", options.preferences.outfitColor);
   if (options?.sessionId) {
     formData.append("session_id", options.sessionId);
   }

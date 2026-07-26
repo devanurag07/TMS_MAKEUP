@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
+import { ChevronLeft, ChevronRight, RotateCcw } from "lucide-react";
 import { GiLipstick, GiPowder, GiEyelashes } from "react-icons/gi";
 import { useTranslations } from "next-intl";
 import type { LookCombo, MakeupCategory } from "../types";
@@ -10,6 +10,7 @@ import type { LookCombo, MakeupCategory } from "../types";
 interface LookAdvisorProps {
   combos: LookCombo[];
   onTry: (combo: LookCombo) => void;
+  onReset?: () => void;
   disabled?: boolean;
 }
 
@@ -22,11 +23,14 @@ const CATEGORY_ICONS: Record<
   eyeshadow: GiEyelashes,
 };
 
-const LookAdvisor = ({ combos, onTry, disabled = false }: LookAdvisorProps) => {
+const LookAdvisor = ({
+  combos,
+  onTry,
+  onReset,
+  disabled = false,
+}: LookAdvisorProps) => {
   const t = useTranslations("lookAdvisor");
-  const tCommon = useTranslations("common");
   const tCategories = useTranslations("customLookMakeup.categories");
-
   const [index, setIndex] = useState(0);
 
   if (combos.length === 0) {
@@ -38,41 +42,75 @@ const LookAdvisor = ({ combos, onTry, disabled = false }: LookAdvisorProps) => {
   }
 
   const combo = combos[Math.min(index, combos.length - 1)];
-  const isFirst = index === 0;
-  const isLast = index === combos.length - 1;
+
+  const handlePrevious = () => {
+    setIndex((current) =>
+      current === 0 ? combos.length - 1 : current - 1
+    );
+  };
+
+  const handleNext = () => {
+    setIndex((current) =>
+      current === combos.length - 1 ? 0 : current + 1
+    );
+  };
 
   return (
-    <div className="h-[85%] bg-black text-white overflow-y-auto">
-      <div className="max-w-5xl mx-auto flex flex-col p-8 justify-around min-h-full">
-        {/* Combo indicator dots */}
-        <div className="flex justify-center gap-3 mb-10">
-          {combos.map((_, i) => (
+    <div className="h-[85%] bg-black text-white flex flex-col px-8">
+      <div className="flex-1 flex flex-col min-h-0">
+        <div className="bg-gray rounded-3xl relative flex-1 p-20 flex flex-col overflow-y-auto">
+          {onReset && (
             <button
-              key={i}
               type="button"
-              onClick={() => setIndex(i)}
-              className={`h-3 rounded-full transition-all ${
-                i === index ? "w-12 bg-white" : "w-3 bg-white/30 hover:bg-white/50"
-              }`}
-              aria-label={t("lookLabel", { index: i + 1 })}
-            />
-          ))}
-        </div>
+              onClick={onReset}
+              className="absolute top-8 right-8 z-10 flex items-center gap-2 rounded-full bg-gray-700 p-4 transition-colors hover:bg-gray-600"
+              title={t("changePreferences")}
+            >
+              <RotateCcw className="h-8 w-8 text-white" />
+              <span className="text-2xl font-medium text-white">
+                {t("changePreferences")}
+              </span>
+            </button>
+          )}
 
-        {/* Combo card */}
-        <div className="flex-1 flex flex-col items-center">
-          <div className="flex items-center gap-4 mb-4">
-            <Sparkles className="w-12 h-12 shrink-0" />
-            <h2 className="text-5xl font-bold text-center">{combo.name}</h2>
+          {/* White image placeholders — same pair layout as FLUX recommended looks */}
+          <div className="mb-8 flex justify-center gap-8">
+            <div className="h-[399px] w-[300px] rounded-2xl bg-white" />
+            <div className="h-[399px] w-[300px] rounded-2xl bg-white" />
+          </div>
+
+          {combos.length > 1 && (
+            <>
+              <button
+                type="button"
+                onClick={handlePrevious}
+                className="absolute left-[-10px] top-1/3 flex h-24 w-24 -translate-y-1/2 items-center justify-center transition-colors"
+                aria-label={t("lookLabel", { index: index })}
+              >
+                <ChevronLeft className="h-24 w-24 text-white" />
+              </button>
+              <button
+                type="button"
+                onClick={handleNext}
+                className="absolute right-[-10px] top-1/3 flex h-24 w-24 -translate-y-1/2 items-center justify-center transition-colors"
+                aria-label={t("lookLabel", { index: index + 2 })}
+              >
+                <ChevronRight className="h-24 w-24 text-white" />
+              </button>
+            </>
+          )}
+
+          <div className="mb-6 text-center">
+            <h2 className="mb-4 text-6xl font-bold text-white">{combo.name}</h2>
           </div>
 
           {combo.description && (
-            <p className="text-3xl text-white/70 text-center max-w-3xl leading-snug mb-14">
-              {combo.description}
-            </p>
+            <div className="mb-10 flex-1 text-4xl leading-relaxed text-gray-300">
+              <p>{combo.description}</p>
+            </div>
           )}
 
-          <div className="grid grid-cols-3 gap-10 w-full max-w-4xl">
+          <div className="mb-4 grid grid-cols-3 gap-10">
             {combo.items.map((item) => {
               const Icon = CATEGORY_ICONS[item.category];
               return (
@@ -81,16 +119,16 @@ const LookAdvisor = ({ combos, onTry, disabled = false }: LookAdvisorProps) => {
                   className="flex flex-col items-center"
                 >
                   <div
-                    className="w-40 h-40 rounded-full border-2 border-white/80 mb-6"
+                    className="mb-6 h-40 w-40 rounded-full border-2 border-white/80"
                     style={{ backgroundColor: item.hex }}
                   />
-                  <div className="flex items-center gap-3 mb-2">
-                    <Icon className="w-8 h-8 shrink-0" size={32} />
-                    <span className="text-2xl text-white/60 uppercase tracking-wide">
+                  <div className="mb-2 flex items-center gap-3">
+                    <Icon className="h-8 w-8 shrink-0" size={32} />
+                    <span className="text-2xl uppercase tracking-wide text-white/60">
                       {tCategories(item.category)}
                     </span>
                   </div>
-                  <span className="text-3xl font-semibold text-center leading-tight">
+                  <span className="text-center text-3xl font-semibold leading-tight">
                     {item.shadeName}
                   </span>
                 </div>
@@ -99,39 +137,33 @@ const LookAdvisor = ({ combos, onTry, disabled = false }: LookAdvisorProps) => {
           </div>
         </div>
 
-        {/* Navigation + Try */}
-        <div className="flex flex-col items-center gap-8 py-10">
-          <Button
-            type="button"
-            onClick={() => onTry(combo)}
-            disabled={disabled}
-            className="!px-20 py-12 text-4xl font-semibold rounded-2xl flex items-center gap-4 bg-primary hover:bg-primary/90 text-white disabled:bg-gray-600 disabled:text-gray-400"
-          >
-            {t("tryThisLook")}
-            <ChevronRight className="w-8 h-8" />
-          </Button>
-
-          <div className="flex items-center justify-center gap-6">
-            <Button
-              type="button"
-              onClick={() => setIndex((i) => Math.max(0, i - 1))}
-              disabled={isFirst}
-              className="!px-12 py-10 text-3xl font-semibold rounded-2xl flex items-center gap-3 bg-white text-black hover:bg-white/90 disabled:opacity-30"
-            >
-              <ChevronLeft className="w-7 h-7" />
-              {tCommon("previous")}
-            </Button>
-            <Button
-              type="button"
-              onClick={() => setIndex((i) => Math.min(combos.length - 1, i + 1))}
-              disabled={isLast}
-              className="!px-12 py-10 text-3xl font-semibold rounded-2xl flex items-center gap-3 bg-white text-black hover:bg-white/90 disabled:opacity-30"
-            >
-              {tCommon("next")}
-              <ChevronRight className="w-7 h-7" />
-            </Button>
+        {combos.length > 1 && (
+          <div className="flex justify-center gap-2 py-6">
+            {combos.map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => setIndex(i)}
+                className={`h-3 w-3 rounded-full transition-colors ${
+                  i === index ? "bg-white" : "bg-gray-600 hover:bg-gray-500"
+                }`}
+                aria-label={t("lookLabel", { index: i + 1 })}
+              />
+            ))}
           </div>
-        </div>
+        )}
+      </div>
+
+      <div className="flex justify-center bg-black py-8">
+        <Button
+          type="button"
+          onClick={() => onTry(combo)}
+          disabled={disabled}
+          className="flex items-center gap-4 rounded-2xl bg-primary !px-20 py-12 text-4xl font-semibold text-white hover:bg-primary/90 disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-400"
+        >
+          {t("tryThisLook")}
+          <ChevronRight size={48} />
+        </Button>
       </div>
     </div>
   );

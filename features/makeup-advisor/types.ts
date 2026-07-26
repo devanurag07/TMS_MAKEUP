@@ -31,3 +31,27 @@ export type LookCombo = {
   description: string;
   items: LookComboItem[];
 };
+
+export type DesiredMakeupLook =
+  | "Natural"
+  | "Soft Glam"
+  | "Full Glam"
+  | "Office"
+  | "Party"
+  | "Bridal";
+
+export type OutfitColor =
+  | "Neutral (Black, White, Grey, Cream)"
+  | "Beige (Beige, Tan, Camel, Brown)"
+  | "Red (Red, Burgundy, Maroon, Wine)"
+  | "Pink (Pink, Rose, Fuchsia)"
+  | "Purple (Lavender, Purple, Plum)"
+  | "Blue (Sky Blue, Navy, Royal Blue)"
+  | "Green (Olive, Emerald, Teal)"
+  | "Warm (Yellow, Orange, Gold, Mustard)"
+  | "Multicolored";
+
+export type LookAdvisorPreferences = {
+  desiredLook: DesiredMakeupLook;
+  outfitColor: OutfitColor;
+};

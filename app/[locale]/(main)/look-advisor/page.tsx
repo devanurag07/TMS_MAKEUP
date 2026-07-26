@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
@@ -9,9 +9,11 @@ import axiosClient from "@/core/network/axios-client";
 import { useTranslations } from "next-intl";
 import TopRow from "@/design-system/components/common/top-row";
 import LookAdvisor from "@/features/makeup-advisor/components/LookAdvisor";
+import LookAdvisorQuestions from "@/features/makeup-advisor/components/LookAdvisorQuestions";
 import MakeupResult from "@/features/makeup-advisor/components/MakeupResult";
 import { fetchLookCombos } from "@/features/makeup-advisor/api/look-advisor-api";
 import type {
+  LookAdvisorPreferences,
   LookCombo,
   MakeupSelection,
 } from "@/features/makeup-advisor/types";
@@ -31,8 +33,10 @@ const Page = () => {
 
   const [activeTab, setActiveTab] = useState<"looks" | "results">("looks");
 
+  const [preferences, setPreferences] =
+    useState<LookAdvisorPreferences | null>(null);
   const [combos, setCombos] = useState<LookCombo[]>([]);
-  const [combosLoading, setCombosLoading] = useState(true);
+  const [combosLoading, setCombosLoading] = useState(false);
   const [combosError, setCombosError] = useState<string | null>(null);
 
   const [sessionId, setSessionId] = useState<string | null>(null);
@@ -52,7 +56,9 @@ const Page = () => {
     return value;
   };
 
-  const generateCombos = useCallback(async () => {
+  const generateCombos = useCallback(async (
+    selectedPreferences: LookAdvisorPreferences
+  ) => {
     setCombosLoading(true);
     setCombosError(null);
 
@@ -78,6 +84,7 @@ const Page = () => {
 
     try {
       const result = await fetchLookCombos(image, {
+        preferences: selectedPreferences,
         sessionId: _sessionId || undefined,
         gender: "female",
       });
@@ -93,10 +100,16 @@ const Page = () => {
     }
   }, [sessionId]);
 
-  useEffect(() => {
-    generateCombos();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const handlePreferencesSubmit = (selected: LookAdvisorPreferences) => {
+    setPreferences(selected);
+    generateCombos(selected);
+  };
+
+  const changePreferences = () => {
+    setPreferences(null);
+    setCombos([]);
+    setCombosError(null);
+  };
 
   const applyMakeup = async (
     selections: MakeupSelection[],
@@ -242,7 +255,9 @@ const Page = () => {
       </div>
 
       {activeTab === "looks" &&
-        (combosLoading ? (
+        (!preferences ? (
+          <LookAdvisorQuestions onSubmit={handlePreferencesSubmit} />
+        ) : combosLoading ? (
           <div className="h-[85%] flex flex-col items-center justify-center gap-8 text-white">
             <Loader2 className="w-20 h-20 animate-spin" />
             <p className="text-4xl font-medium">{t("lookAdvisor.analyzing")}</p>
@@ -265,7 +280,7 @@ const Page = () => {
               </Button>
             ) : (
               <Button
-                onClick={generateCombos}
+                onClick={() => generateCombos(preferences)}
                 className="!px-16 py-10 text-3xl font-semibold rounded-2xl bg-primary hover:bg-primary/90 text-white"
               >
                 {t("lookAdvisor.retry")}
@@ -276,6 +291,7 @@ const Page = () => {
           <LookAdvisor
             combos={combos}
             onTry={handleTry}
+            onReset={changePreferences}
             disabled={resultLoading}
           />
         ))}
