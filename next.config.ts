@@ -6,7 +6,11 @@ const withNextIntl = createNextIntlPlugin('./i18n.ts');
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
-    domains: ["utfs.io","fluxv2-salon-products.s3.us-east-1.amazonaws.com"],
+    domains: [
+      "utfs.io",
+      "cdn.trymystyle.com",
+      "fluxv2-salon-products.s3.us-east-1.amazonaws.com",
+    ],
   },
   // include brotli assets for the specific route(s) that need Chromium
 
