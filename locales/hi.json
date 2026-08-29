@@ -71,7 +71,17 @@
       },
       "submit": "Get recommendations"
     },
-    "changePreferences": "Change preferences"
+    "changePreferences": "Change preferences",
+    "backToResults": "परिणामों पर वापस जाएँ",
+    "progress": {
+      "creatingLook": "आपका लुक बन रहा है",
+      "craftingLooks": "लुक तैयार हो रहे हैं",
+      "uploading": "फ़ोटो तैयार हो रही है…",
+      "detecting": "चेहरे की विशेषताएँ पढ़ी जा रही हैं…",
+      "generating": "आपका लुक बन रहा है…",
+      "matchingLooks": "लुक मिलाए जा रहे हैं…",
+      "finalizing": "अंतिम सुधार…"
+    }
   },
   "customLookMakeup": {
     "selectShadeFor": "Select a {effect} shade:",
@@ -98,6 +108,7 @@
     }
   },
   "makeupResult": {
+    "addOn": "इसी तस्वीर के साथ जारी रखें: दूसरा लुक चुनें",
     "addOnLipstick": "Add lipstick",
     "addOnBlush": "Add blush",
     "addOnEyeshadow": "Add eyeshadow",

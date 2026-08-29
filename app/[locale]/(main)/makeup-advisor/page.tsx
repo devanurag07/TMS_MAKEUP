@@ -15,11 +15,13 @@ import type {
 import {
   getFileFromLocalStorage,
   imageUrlToBase64,
+  saveFileToLocalStorage,
 } from "@/core/utils/common";
 import { CAMERA_CAPTURE_KEY } from "@/core/constants/common-constants";
 import { CHANGE_MAKEUP_URL } from "@/core/constants/url-constants";
 import { useSalonServiceGuard } from "@/core/hooks/useSalonServiceGuard";
 import { getSessionId } from "@/core/utils/session";
+import { buildMakeupEditPrompt } from "@/features/makeup-advisor/utils/build-makeup-edit-prompt";
 
 const Page = () => {
   const router = useRouter();
@@ -39,6 +41,9 @@ const Page = () => {
     null
   );
   const [selectedShade, setSelectedShade] = useState("");
+  const [addOnReturn, setAddOnReturn] = useState<{
+    capture: File | null;
+  } | null>(null);
 
   const normalizeBase64 = (raw: string) => {
     let value = raw.trim();
@@ -57,14 +62,8 @@ const Page = () => {
       throw new Error("IMAGE_NOT_READY");
     }
 
-    const basePrompt =
-      selections.length === 1
-        ? selections[0].prompt
-        : `Apply all of the following makeup together in one natural, cohesive look. ${selections
-            .map((s) => s.prompt)
-            .join(". ")}.`;
-
-    const prompt = `${basePrompt} Do not change any facial feature of the woman like lips, eyes or anything else.`;
+    // Short imperative catalog prompts + identity postfix (no facial-feature negation).
+    const prompt = buildMakeupEditPrompt(selections);
 
     const makeupName = selections.map((s) => s.shadeName).join(" · ");
     const makeupType =
@@ -112,6 +111,7 @@ const Page = () => {
 
     let _sessionId = sessionId ?? "";
     setResultLoading(true);
+    setAddOnReturn(null);
     setSelectedShade(selections.map((s) => s.shadeName).join(" · "));
     setCategory(selections.map((s) => s.category).join(","));
     setActiveTab("results");
@@ -154,10 +154,20 @@ const Page = () => {
     }
   };
 
-  const handleAddCategory = (nextCategory: string) => {
-    const cat = nextCategory as MakeupCategory;
-    setCategory(cat);
-    setInitialCategories([cat]);
+  const restoreAddOnResults = () => {
+    if (!addOnReturn) return;
+    if (addOnReturn.capture) {
+      void saveFileToLocalStorage(addOnReturn.capture, CAMERA_CAPTURE_KEY);
+    }
+    setActiveTab("results");
+    setAddOnReturn(null);
+  };
+
+  const handleAddStyle = (previousCapture?: File | null) => {
+    setAddOnReturn({
+      capture: previousCapture ?? getFileFromLocalStorage(CAMERA_CAPTURE_KEY),
+    });
+    setInitialCategories([]);
     setCustomLookKey((k) => k + 1);
     setActiveTab("custom");
   };
@@ -171,7 +181,13 @@ const Page = () => {
   return (
     <div className="h-full w-full bg-black">
       <TopRow
-        onBack={() => router.push("/select-tool")}
+        onBack={() => {
+          if (addOnReturn && activeTab === "custom") {
+            restoreAddOnResults();
+            return;
+          }
+          router.push("/select-tool");
+        }}
         title={t("makeupAdvisor.title")}
       />
 
@@ -199,11 +215,24 @@ const Page = () => {
       </div>
 
       {activeTab === "custom" && (
-        <CustomLookMakeup
-          key={customLookKey}
-          initialCategories={initialCategories}
-          onSubmit={handleMakeupSubmit}
-        />
+        <>
+          {addOnReturn && (
+            <div className="flex justify-center mb-6">
+              <button
+                type="button"
+                onClick={restoreAddOnResults}
+                className="bg-black text-white text-5xl py-10 px-12 border-2 border-white rounded-2xl"
+              >
+                {t("lookAdvisor.backToResults")}
+              </button>
+            </div>
+          )}
+          <CustomLookMakeup
+            key={customLookKey}
+            initialCategories={initialCategories}
+            onSubmit={handleMakeupSubmit}
+          />
+        </>
       )}
 
       {activeTab === "results" && (
@@ -214,7 +243,7 @@ const Page = () => {
           isLoading={resultLoading}
           onRegenerate={handleRegenerate}
           service={category}
-          handleAddStyle={handleAddCategory}
+          handleAddStyle={handleAddStyle}
         />
       )}
     </div>

@@ -1,5 +1,6 @@
 import axiosClient from "@/core/network/axios-client";
 import { MAKEUP_LOOK_ADVISOR_URL } from "@/core/constants/url-constants";
+import { resolveCatalogMakeupPrompt } from "@/features/makeup-advisor/utils/build-makeup-edit-prompt";
 import type {
   LookAdvisorPreferences,
   LookCombo,
@@ -41,17 +42,26 @@ const normalizeHex = (value?: string): string => {
   return /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(hex) ? hex : "#cccccc";
 };
 
-const mapItem = (raw: RawComboItem): LookComboItem => ({
-  category: normalizeCategory(raw.category),
-  shadeName: (raw.shade_name ?? "").trim() || "Shade",
-  prompt: (raw.prompt ?? "").trim(),
-  hex: normalizeHex(raw.hex),
-});
+const mapItem = (raw: RawComboItem): LookComboItem | null => {
+  const category = normalizeCategory(raw.category);
+  const shadeName = (raw.shade_name ?? "").trim();
+  if (!shadeName) return null;
+
+  // Always use catalog edit prompts — LLM wording trips Gemini safety on selfies.
+  return {
+    category,
+    shadeName,
+    prompt: resolveCatalogMakeupPrompt(category, shadeName),
+    hex: normalizeHex(raw.hex),
+  };
+};
 
 const mapCombo = (raw: RawCombo): LookCombo => ({
   name: (raw.name ?? "").trim() || "Suggested Look",
   description: (raw.description ?? "").trim(),
-  items: (raw.items ?? []).map(mapItem).filter((item) => item.prompt),
+  items: (raw.items ?? [])
+    .map(mapItem)
+    .filter((item): item is LookComboItem => item !== null),
 });
 
 /**

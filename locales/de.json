@@ -71,7 +71,17 @@
       },
       "submit": "Get recommendations"
     },
-    "changePreferences": "Change preferences"
+    "changePreferences": "Change preferences",
+    "backToResults": "Zurück zu den Ergebnissen",
+    "progress": {
+      "creatingLook": "Ihr Look wird erstellt",
+      "craftingLooks": "Looks werden vorbereitet",
+      "uploading": "Foto wird vorbereitet…",
+      "detecting": "Gesichtszüge werden gelesen…",
+      "generating": "Ihr Look wird erzeugt…",
+      "matchingLooks": "Looks werden zugeordnet…",
+      "finalizing": "Letzte Feinschliffe…"
+    }
   },
   "customLookMakeup": {
     "selectShadeFor": "Select a {effect} shade:",
@@ -98,6 +108,7 @@
     }
   },
   "makeupResult": {
+    "addOn": "Mit diesem Bild fortfahren: anderen Look wählen",
     "addOnLipstick": "Add lipstick",
     "addOnBlush": "Add blush",
     "addOnEyeshadow": "Add eyeshadow",

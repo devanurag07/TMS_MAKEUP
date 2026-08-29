@@ -201,3 +201,32 @@
 .skin-metrics-scroll::-webkit-scrollbar {
   display: none;
 }
+
+@keyframes analysis-scan-y {
+  0% {
+    top: 8%;
+    opacity: 0.35;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    top: 88%;
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    top: 8%;
+    opacity: 0.35;
+  }
+}
+
+.analysis-scan-line {
+  animation: analysis-scan-y 2.4s ease-in-out infinite;
+}
+
+.analysis-scan-line-fast {
+  animation: analysis-scan-y 1.8s ease-in-out infinite;
+}

@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import axiosClient from "@/core/network/axios-client";
 import { useTranslations } from "next-intl";
@@ -20,11 +19,18 @@ import type {
 import {
   getFileFromLocalStorage,
   imageUrlToBase64,
+  saveFileToLocalStorage,
 } from "@/core/utils/common";
+import AnalysisProgressScreen, {
+  type AnalysisProgressImage,
+  filesToProgressImages,
+  revokeProgressImages,
+} from "@/design-system/components/common/analysis-progress-screen";
 import { CAMERA_CAPTURE_KEY } from "@/core/constants/common-constants";
 import { CHANGE_MAKEUP_URL } from "@/core/constants/url-constants";
 import { useSalonServiceGuard } from "@/core/hooks/useSalonServiceGuard";
 import { getSessionId } from "@/core/utils/session";
+import { buildMakeupEditPrompt } from "@/features/makeup-advisor/utils/build-makeup-edit-prompt";
 
 const Page = () => {
   const router = useRouter();
@@ -47,6 +53,23 @@ const Page = () => {
   );
   const [selectedShade, setSelectedShade] = useState("");
   const [category, setCategory] = useState("");
+  const [addOnReturn, setAddOnReturn] = useState<{
+    capture: File | null;
+  } | null>(null);
+  const [comboProgressImages, setComboProgressImages] = useState<
+    AnalysisProgressImage[]
+  >([]);
+
+  useEffect(() => {
+    if (!combosLoading) return;
+    const file = getFileFromLocalStorage(CAMERA_CAPTURE_KEY);
+    const next = filesToProgressImages([{ file }]);
+    setComboProgressImages(next);
+    return () => {
+      revokeProgressImages(next);
+      setComboProgressImages([]);
+    };
+  }, [combosLoading]);
 
   const normalizeBase64 = (raw: string) => {
     let value = raw.trim();
@@ -120,12 +143,8 @@ const Page = () => {
       throw new Error("IMAGE_NOT_READY");
     }
 
-    const prompt =
-      selections.length === 1
-        ? selections[0].prompt
-        : `Apply all of the following makeup together in one natural, cohesive look. ${selections
-            .map((s) => s.prompt)
-            .join(". ")}.`;
+    // Catalog-based imperative prompt — LLM/fluffy wrappers trip Fal Gemini safety.
+    const prompt = buildMakeupEditPrompt(selections);
 
     const makeupName = selections.map((s) => s.shadeName).join(" · ");
     const makeupType =
@@ -178,6 +197,7 @@ const Page = () => {
 
     let _sessionId = sessionId ?? "";
     setResultLoading(true);
+    setAddOnReturn(null);
     setSelectedShade(combo.name);
     setCategory(selections.map((s) => s.category).join(","));
     setActiveTab("results");
@@ -220,12 +240,34 @@ const Page = () => {
     }
   };
 
+  const restoreAddOnResults = () => {
+    if (!addOnReturn) return;
+    if (addOnReturn.capture) {
+      void saveFileToLocalStorage(addOnReturn.capture, CAMERA_CAPTURE_KEY);
+    }
+    setActiveTab("results");
+    setAddOnReturn(null);
+  };
+
+  const handleAddStyle = (previousCapture?: File | null) => {
+    setAddOnReturn({
+      capture: previousCapture ?? getFileFromLocalStorage(CAMERA_CAPTURE_KEY),
+    });
+    setActiveTab("looks");
+  };
+
   const backToLooks = () => setActiveTab("looks");
 
   return (
     <div className="h-full w-full bg-black">
       <TopRow
-        onBack={() => router.push("/select-tool")}
+        onBack={() => {
+          if (addOnReturn && activeTab === "looks") {
+            restoreAddOnResults();
+            return;
+          }
+          router.push("/select-tool");
+        }}
         title={t("lookAdvisor.title")}
       />
 
@@ -256,11 +298,33 @@ const Page = () => {
 
       {activeTab === "looks" &&
         (!preferences ? (
-          <LookAdvisorQuestions onSubmit={handlePreferencesSubmit} />
+          <>
+            {addOnReturn && (
+              <div className="flex justify-center mb-6">
+                <button
+                  type="button"
+                  onClick={restoreAddOnResults}
+                  className="bg-black text-white text-5xl py-10 px-12 border-2 border-white rounded-2xl"
+                >
+                  {t("lookAdvisor.backToResults")}
+                </button>
+              </div>
+            )}
+            <LookAdvisorQuestions onSubmit={handlePreferencesSubmit} />
+          </>
         ) : combosLoading ? (
-          <div className="h-[85%] flex flex-col items-center justify-center gap-8 text-white">
-            <Loader2 className="w-20 h-20 animate-spin" />
-            <p className="text-4xl font-medium">{t("lookAdvisor.analyzing")}</p>
+          <div className="h-full min-h-[70vh]">
+            <AnalysisProgressScreen
+              title={t("lookAdvisor.progress.craftingLooks")}
+              variant="recommendation"
+              images={comboProgressImages}
+              stages={[
+                t("lookAdvisor.progress.uploading"),
+                t("lookAdvisor.progress.detecting"),
+                t("lookAdvisor.progress.matchingLooks"),
+                t("lookAdvisor.progress.finalizing"),
+              ]}
+            />
           </div>
         ) : combosError ? (
           <div className="h-[85%] flex flex-col items-center justify-center gap-8 text-white px-8 text-center">
@@ -288,12 +352,25 @@ const Page = () => {
             )}
           </div>
         ) : (
-          <LookAdvisor
-            combos={combos}
-            onTry={handleTry}
-            onReset={changePreferences}
-            disabled={resultLoading}
-          />
+          <>
+            {addOnReturn && (
+              <div className="flex justify-center mb-6">
+                <button
+                  type="button"
+                  onClick={restoreAddOnResults}
+                  className="bg-black text-white text-5xl py-10 px-12 border-2 border-white rounded-2xl"
+                >
+                  {t("lookAdvisor.backToResults")}
+                </button>
+              </div>
+            )}
+            <LookAdvisor
+              combos={combos}
+              onTry={handleTry}
+              onReset={changePreferences}
+              disabled={resultLoading}
+            />
+          </>
         ))}
 
       {activeTab === "results" && (
@@ -304,7 +381,7 @@ const Page = () => {
           isLoading={resultLoading}
           onRegenerate={backToLooks}
           service={category}
-          handleAddStyle={backToLooks}
+          handleAddStyle={handleAddStyle}
         />
       )}
     </div>

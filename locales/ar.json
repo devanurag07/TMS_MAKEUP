@@ -71,7 +71,17 @@
       },
       "submit": "Get recommendations"
     },
-    "changePreferences": "Change preferences"
+    "changePreferences": "Change preferences",
+    "backToResults": "العودة إلى النتائج",
+    "progress": {
+      "creatingLook": "جارٍ إنشاء إطلالتك",
+      "craftingLooks": "جارٍ تجهيز الإطلالات",
+      "uploading": "جارٍ تجهيز صورتك…",
+      "detecting": "جارٍ قراءة ملامح الوجه…",
+      "generating": "جارٍ إنشاء إطلالتك…",
+      "matchingLooks": "جارٍ مطابقة الإطلالات…",
+      "finalizing": "اللمسات الأخيرة…"
+    }
   },
   "customLookMakeup": {
     "selectShadeFor": "Select a {effect} shade:",
@@ -98,6 +108,7 @@
     }
   },
   "makeupResult": {
+    "addOn": "المتابعة بهذه الصورة: اختاري إطلالة أخرى",
     "addOnLipstick": "Add lipstick",
     "addOnBlush": "Add blush",
     "addOnEyeshadow": "Add eyeshadow",
