@@ -45,6 +45,19 @@ type ShadeOption = {
   prompt: string;
 };
 
+type SubcategoryGroup = {
+  subcategory: string;
+  tag: string | null;
+  shades: ShadeOption[];
+};
+
+/** Derive a finish tag from the subcategory name (e.g. "Matte", "Shimmer") */
+const deriveTag = (subcategory: string): string | null => {
+  if (subcategory.toLowerCase().includes("shimmer")) return "Shimmer";
+  if (subcategory.toLowerCase().includes("matte")) return "Matte";
+  return null;
+};
+
 const CustomLookMakeup = ({
   initialCategories = [],
   onSubmit,
@@ -70,23 +83,39 @@ const CustomLookMakeup = ({
     setPage(startPage);
   }, [startPage]);
 
-  const shadesByCategory = useMemo(() => {
+  /** Build grouped subcategory data from the JSON */
+  const groupedByCategory = useMemo(() => {
     return CATEGORY_ORDER.reduce(
       (acc, category) => {
-        const categoryPrompts = prompts[category] ?? {};
-        acc[category] = Object.entries(categoryPrompts).map(
-          ([name, entry]) => ({
-            id: name,
-            name,
-            rgb: entry.rgb,
-            prompt: entry.prompt,
+        const subcategories = prompts[category] ?? {};
+        acc[category] = Object.entries(subcategories).map(
+          ([subcategoryName, shades]) => ({
+            subcategory: subcategoryName,
+            tag: deriveTag(subcategoryName),
+            shades: shades.map((shade) => ({
+              id: `${subcategoryName}::${shade.name}`,
+              name: shade.name,
+              rgb: shade.rgb,
+              prompt: shade.prompt,
+            })),
           })
         );
         return acc;
       },
-      {} as Record<MakeupCategory, ShadeOption[]>
+      {} as Record<MakeupCategory, SubcategoryGroup[]>
     );
   }, []);
+
+  /** Flat list of all shades per category for selection lookup */
+  const allShadesByCategory = useMemo(() => {
+    return CATEGORY_ORDER.reduce(
+      (acc, category) => {
+        acc[category] = groupedByCategory[category].flatMap((g) => g.shades);
+        return acc;
+      },
+      {} as Record<MakeupCategory, ShadeOption[]>
+    );
+  }, [groupedByCategory]);
 
   const selectShade = (category: MakeupCategory, shadeId: string) => {
     setSelectedShades((prev) => {
@@ -102,7 +131,7 @@ const CustomLookMakeup = ({
   const selections: MakeupSelection[] = CATEGORY_ORDER.filter(
     (category) => selectedShades[category]
   ).map((category) => {
-    const shade = shadesByCategory[category].find(
+    const shade = allShadesByCategory[category].find(
       (item) => item.id === selectedShades[category]
     )!;
     return {
@@ -149,10 +178,11 @@ const CustomLookMakeup = ({
         {categoriesOnPage.map((category) => {
           const Icon = CATEGORY_ICONS[category];
           const selectedId = selectedShades[category];
+          const groups = groupedByCategory[category];
 
           return (
-            <div key={category} className=" flex-1">
-              <div className="relative">
+            <div key={category} className="flex-1">
+              <div className="relative mb-10">
                 <div className="px-6 py-3 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 bg-black flex items-center gap-4 whitespace-nowrap">
                   <Icon className="w-12 h-12 shrink-0" size={48} />
                   <span className="text-4xl font-bold">
@@ -164,43 +194,63 @@ const CustomLookMakeup = ({
                 <div className="bg-white h-[2px] w-full" />
               </div>
 
-              <div className="grid grid-cols-4 gap-6 max-w-4xl mx-auto mt-20">
-                {shadesByCategory[category].map((shade) => {
-                  const isSelected = selectedId === shade.id;
-                  return (
-                    <button
-                      key={shade.id}
-                      type="button"
-                      onClick={() => selectShade(category, shade.id)}
-                      className="flex flex-col items-center transition-opacity duration-150"
-                    >
-                      <div
-                        className={`relative w-40 h-20 rounded-2xl mb-4 border-2 flex items-center justify-center transition-colors ${
-                          isSelected
-                            ? "border-white"
-                            : "border-transparent"
-                        }`}
-                        style={{ backgroundColor: rgbToCss(shade.rgb) }}
-                      >
-                        {isSelected && (
-                          <Check
-                            className="w-10 h-10 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]"
-                            strokeWidth={3}
-                          />
-                        )}
-                      </div>
-                      <span
-                        className={`text-3xl text-center leading-tight ${
-                          isSelected
-                            ? "font-semibold text-white"
-                            : "font-medium text-white/50"
-                        }`}
-                      >
-                        {shade.name}
+              <div className="space-y-10">
+                {groups.map((group) => (
+                  <div key={group.subcategory}>
+                    {/* Subcategory header */}
+                    <div className="flex items-center gap-4 mb-6">
+                      <span className="text-2xl font-semibold text-white whitespace-nowrap">
+                        {group.subcategory}
                       </span>
-                    </button>
-                  );
-                })}
+                      <div className="flex-1 h-[1px] bg-white/20" />
+                      {group.tag && (
+                        <span className="text-lg text-white/50 whitespace-nowrap">
+                          {group.tag}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Shade swatches - grid wraps into rows of 4 */}
+                    <div className="grid grid-cols-4 gap-6">
+                      {group.shades.map((shade) => {
+                        const isSelected = selectedId === shade.id;
+                        return (
+                          <button
+                            key={shade.id}
+                            type="button"
+                            onClick={() => selectShade(category, shade.id)}
+                            className="flex flex-col items-center transition-opacity duration-150"
+                          >
+                            <div
+                              className={`relative w-full aspect-[8/3] rounded-2xl mb-3 border-2 flex items-center justify-center transition-colors ${
+                                isSelected
+                                  ? "border-white"
+                                  : "border-transparent"
+                              }`}
+                              style={{ backgroundColor: rgbToCss(shade.rgb) }}
+                            >
+                              {isSelected && (
+                                <Check
+                                  className="w-8 h-8 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]"
+                                  strokeWidth={3}
+                                />
+                              )}
+                            </div>
+                            <span
+                              className={`text-xl text-center leading-tight ${
+                                isSelected
+                                  ? "font-semibold text-white"
+                                  : "font-medium text-white"
+                              }`}
+                            >
+                              {shade.name}
+                            </span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           );

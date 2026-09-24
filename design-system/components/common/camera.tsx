@@ -51,8 +51,8 @@ export const Camera = ({
         video: {
           deviceId: selectedId !== "" ? { exact: selectedId } : undefined,
           facingMode: "user",
-          width: { ideal: 1280 },
-          height: { ideal: 720 },
+          width: { ideal: 1920 },
+          height: { ideal: 1080 },
         },
       };
       const stream = await navigator.mediaDevices.getUserMedia(constraints);

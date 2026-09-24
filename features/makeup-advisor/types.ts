@@ -1,13 +1,14 @@
 export type MakeupCategory = "lipstick" | "blush" | "eyeshadow";
 
 export type MakeupShadeEntry = {
+  name: string;
   prompt: string;
   rgb: number[];
 };
 
 export type MakeupPrompts = Record<
   MakeupCategory,
-  Record<string, MakeupShadeEntry>
+  Record<string, MakeupShadeEntry[]>
 >;
 
 /** One effect + shade chosen on Custom Look before Proceed */

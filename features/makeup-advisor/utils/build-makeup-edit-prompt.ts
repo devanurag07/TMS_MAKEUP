@@ -20,14 +20,19 @@ const FALLBACK_BY_CATEGORY: Record<MakeupCategory, (shade: string) => string> =
 
 /**
  * Resolve a short, imperative catalog edit prompt for a shade.
- * Prefer this over LLM-generated prompts for Fal / Gemini Nano Banana.
+ * Searches across all subcategories within the given category.
  */
 export const resolveCatalogMakeupPrompt = (
   category: MakeupCategory,
   shadeName: string
 ): string => {
-  const entry = prompts[category]?.[shadeName];
-  if (entry?.prompt?.trim()) return entry.prompt.trim();
+  const subcategories = prompts[category];
+  if (subcategories) {
+    for (const shades of Object.values(subcategories)) {
+      const entry = shades.find((s) => s.name === shadeName);
+      if (entry?.prompt?.trim()) return entry.prompt.trim();
+    }
+  }
   return FALLBACK_BY_CATEGORY[category](shadeName);
 };
 

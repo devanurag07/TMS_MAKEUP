@@ -5,6 +5,7 @@ import {
   SHOW_QUESTIONS_KEY,
 } from "@/core/constants/common-constants";
 import { persistCurrentSalon } from "@/core/utils/salon-storage";
+import { applySalonTheme } from "@/core/utils/apply-salon-theme";
 import { CURRENT_SALON_URL } from "@/core/constants/url-constants";
 import axiosClient from "@/core/network/axios-client";
 import Login from "@/features/auth/forms/login-form";
@@ -29,6 +30,7 @@ const MirrorFrame = ({ children }: MirrorFrameProps) => {
         const data = response.data;
         if (data?.data && typeof data.data === "object") {
           persistCurrentSalon(data.data);
+          applySalonTheme();
         }
         const inputAvailable = data.data.input_box_available;
         const showQuestions = data.data.show_questions;
@@ -82,6 +84,7 @@ const MirrorFrame = ({ children }: MirrorFrameProps) => {
   }, []);
 
   useEffect(() => {
+    applySalonTheme();
     getCurrentSalon();
   }, []);
 

@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
   images: {
     domains: [
       "utfs.io",
-      "cdn.trymystyle.com",
+      "trymystyle-pullzone.b-cdn.net",
       "fluxv2-salon-products.s3.us-east-1.amazonaws.com",
     ],
   },
